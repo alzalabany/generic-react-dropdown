@@ -57,13 +57,15 @@ const Divider = styled.li`
   min-height: 2px;
 `;
 
-interface IMenuItem {
+export interface IMenuItem {
   label: string;
+  to?: string;
+  as?: React.ReactNode;
   icon?: React.ReactNode;
   divider?: boolean;
 }
 
-interface IProps {
+interface IDropDown {
   items: IMenuItem[];
   onSelect(): void;
   children: (toggle: ToggleMenu) => React.ReactNode;
@@ -90,8 +92,8 @@ export type ToggleMenu = ReturnType<DropDown["toggle"]>;
   </DropDown>
    ```
  */
-class DropDown extends React.PureComponent<IProps, IState> {
-  state = { open: false };
+class DropDown extends React.PureComponent<IDropDown, IState> {
+  readonly state = { open: false };
 
   componentWillUnmount() {
     this.stop();
