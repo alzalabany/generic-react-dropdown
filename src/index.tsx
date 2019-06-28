@@ -1,7 +1,7 @@
 import * as React from "react";
 import { render } from "react-dom";
 import { BrowserRouter as Router } from "react-router-dom";
-import Dropdown, { ToggleMenu } from "./Dropdown";
+import Dropdown, { ToggleMenu, IMenuItem } from "./Dropdown";
 
 const demoItems = [
   { label: "one", icon: <span>T</span>, to: "/home" },
@@ -28,10 +28,21 @@ class App extends React.PureComponent<{}, {}> {
           <Dropdown
             onSelect={console.table}
             items={demoItems}
-            renderItem={null}
+            renderItem={customRender}
           >
-            {(toggle: ToggleMenu) => <h4 onClick={toggle}> open </h4>}
+            {(toggle: ToggleMenu) => <button onClick={toggle}> open </button>}
           </Dropdown>
+
+          <div style={{ width: "100px", border: "1px solid", margin: "5rem" }}>
+            <h5> test narrow </h5>
+            <Dropdown
+              onSelect={console.table}
+              items={demoItems}
+              renderItem={customRender}
+            >
+              {(toggle: ToggleMenu) => <button onClick={toggle}> open </button>}
+            </Dropdown>
+          </div>
         </div>
       </Router>
     );
@@ -39,3 +50,20 @@ class App extends React.PureComponent<{}, {}> {
 }
 
 render(<App />, document.getElementById("root"));
+
+function customRender({ divider, label, style, props }: IMenuItem) {
+  return (
+    <li
+      style={{
+        ...style,
+        background: divider ? "#222" : "#FFF",
+        overflow: "hidden",
+        borderBottom: "1px solid #CCC",
+        height: divider ? "2px" : "auto"
+      }}
+      {...props}
+    >
+      this is custom for <label>{label}</label>
+    </li>
+  );
+}
