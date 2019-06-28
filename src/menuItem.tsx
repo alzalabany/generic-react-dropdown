@@ -30,7 +30,7 @@ const Link = styled.a`
 
 const MenuItem: React.SFC = ({ label, icon, ...props }: IProps) => (
   <Item>
-    <Link {...props} as={props.to && NavLink}>
+    <Link {...props} as={props.to ? NavLink : props.as}>
       {icon && <span>{icon}</span>}
       {label}
     </Link>
