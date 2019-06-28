@@ -79,10 +79,12 @@ export type ToggleMenu = ReturnType<DropDown["toggle"]>;
 /**
  * Usage:
  * 
+ * if you include "to" prop it will use NavLink, otherwise it will use an A href.
+ * if you includ "as" prop it will use that as Component insteed.
  * ``` 
   <DropDown 
     onSelect={console.table} 
-    items={[{label:'one',icon:<Fa500Px />, to:'/home'}]}
+    items={[{label:string ,icon:<ReactNode />, to:'/home'}]}
     renderItem={fn?}>
     {(toggle)=><h4 onClick={toggle} > open </h4>}
   </DropDown>
