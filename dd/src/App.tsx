@@ -1,5 +1,4 @@
-import * as React from "react";
-import { render } from "react-dom";
+import React from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 import Dropdown, { ToggleMenu, IMenuItem } from "./Dropdown";
 
@@ -10,7 +9,7 @@ const demoItems = [
   { label: "Exit", icon: <span>X</span>, to: "/exit", style: { color: "red" } }
 ];
 
-class App extends React.PureComponent<{}, {}> {
+export default class App extends React.PureComponent<{}, {}> {
   public render() {
     return (
       <Router>
@@ -48,8 +47,6 @@ class App extends React.PureComponent<{}, {}> {
     );
   }
 }
-
-render(<App />, document.getElementById("root"));
 
 function customRender({ divider, label, style, props }: IMenuItem) {
   return (
