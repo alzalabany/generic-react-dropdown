@@ -2,12 +2,8 @@ import React, { ReactNode } from "react";
 import T from "prop-types";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
+import { IMenuItem } from '../Dropdown'
 
-interface IProps {
-  children?: ReactNode;
-  label: string;
-  icon?: ReactNode;
-}
 const Item = styled.li`
   padding: 0
   overflow: hidden;
@@ -28,7 +24,7 @@ const Link = styled.a`
   }
 `;
 
-const MenuItem: React.SFC = ({ label, icon, ...props }: IProps) => (
+const MenuItem: React.SFC = ({ label, icon, ...props }: IMenuItem) => (
   <Item>
     <Link {...props} as={props.to ? NavLink : props.as}>
       {icon && <span>{icon}</span>}
