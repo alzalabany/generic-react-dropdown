@@ -1,6 +1,7 @@
 import * as React from "react";
 import styled from "styled-components";
 import MenuItem from "./menuItem";
+import { IDropDown, IMenuItem } from "./types";
 
 const DropDownContainer = styled.div`
   position: relative;
@@ -11,7 +12,9 @@ const DropDownContainer = styled.div`
     margin-bottom: 0;
   }
 `;
-
+interface IDDMProps {
+  visible?: boolean;
+}
 const DropDownMenu = styled.ul`
   box-sizing: content-box;
   background-color: #fff;
@@ -19,8 +22,8 @@ const DropDownMenu = styled.ul`
   display: flex;
   flex-flow: column nowrap;
   flex-bases: 100%;
-  opacity: ${({ visible }) => (visible ? "1" : "0")};
-  height: ${({ visible }) => (visible ? "auto" : "0")};
+  opacity: ${({ visible }: IDDMProps) => (visible ? "1" : "0")};
+  height: ${({ visible }: IDDMProps) => (visible ? "auto" : "0")};
   overflow: auto;
   transition: all 0.5s cubic-bezier(0.35, 0, 0.25, 1);
   position: absolute;
@@ -48,26 +51,9 @@ const Divider = styled.li`
   min-height: 2px;
 `;
 
-export interface IMenuItem {
-  label: string;
-  to?: string;
-  as?: React.ReactNode;
-  icon?: React.ReactNode;
-  divider?: boolean;
-}
-
-interface IDropDown {
-  items: IMenuItem[];
-  onSelect(): void;
-  children: (toggle: ToggleMenu) => React.ReactNode;
-  renderItem(item: IMenuItem): React.ReactNode;
-}
-
 interface IState {
   open: boolean;
 }
-
-export type ToggleMenu = ReturnType<DropDown["toggle"]>;
 
 /**
  * Usage:

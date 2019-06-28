@@ -1,11 +1,12 @@
 import React from "react";
 import { BrowserRouter as Router } from "react-router-dom";
-import Dropdown, { ToggleMenu, IMenuItem } from "./Dropdown";
+import Dropdown from "./Dropdown";
+import { IMenuItem, ToggleMenu } from "./Dropdown/types";
 
-const demoItems = [
+const demoItems: IMenuItem[] = [
   { label: "one", icon: <span>T</span>, to: "/home" },
   { label: "Just string" },
-  { divider: true },
+  { label: "null", divider: true },
   { label: "Exit", icon: <span>X</span>, to: "/exit", style: { color: "red" } }
 ];
 
@@ -15,12 +16,8 @@ export default class App extends React.PureComponent<{}, {}> {
       <Router>
         <div>
           <h1> Dropdown using array of items </h1>
-          <Dropdown
-            onSelect={console.table}
-            items={demoItems}
-            renderItem={null}
-          >
-            {(toggle: ToggleMenu) => <h4 onClick={toggle}> open </h4>}
+          <Dropdown onSelect={console.table} items={demoItems}>
+            {toggle => <h4 onClick={toggle}> open </h4>}
           </Dropdown>
           <hr />
           <h1> Dropdown with custom render </h1>
@@ -48,7 +45,7 @@ export default class App extends React.PureComponent<{}, {}> {
   }
 }
 
-function customRender({ divider, label, style, props }: IMenuItem) {
+function customRender({ divider, label, style, ...props }: IMenuItem) {
   return (
     <li
       style={{

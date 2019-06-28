@@ -1,7 +1,7 @@
 import * as React from "react";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
-import { IMenuItem } from "./index";
+import { IMenuItem } from "./types";
 
 const Item = styled.li`
   padding: 0
@@ -23,15 +23,17 @@ const Link = styled.a`
   }
 `;
 
-type ImenuItem = React.SFC & HTMLButtonElement;
-
-const MenuItem: ImenuItem = ({ label, icon, ...props }: IMenuItem) => (
-  <Item>
-    <Link {...props} as={props.to ? NavLink : props.as}>
-      {icon && <span>{icon}</span>}
-      {label}
-    </Link>
-  </Item>
-);
-
+class MenuItem extends React.PureComponent<IMenuItem> {
+  render() {
+    const { label, icon, ...props } = this.props;
+    return (
+      <Item>
+        <Link {...props} as={props.to ? NavLink : undefined}>
+          {icon && <span>{icon}</span>}
+          {label}
+        </Link>
+      </Item>
+    );
+  }
+}
 export default MenuItem;
