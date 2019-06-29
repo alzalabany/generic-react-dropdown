@@ -62,7 +62,7 @@ interface IState {
  * if you includ "as" prop it will use that as Component insteed.
  * ``` 
   <DropDown 
-    onSelect={console.table} 
+    onSelect={console.table} // it only work if no renderItem supplied
     items={[{label:string ,icon:<ReactNode />, to:'/home'}]}
     renderItem={fn?}>
     {(toggle)=><h4 onClick={toggle} > open </h4>}
