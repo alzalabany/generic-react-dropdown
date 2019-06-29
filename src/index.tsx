@@ -1,69 +1,12 @@
-import * as React from "react";
-import { render } from "react-dom";
-import { BrowserRouter as Router } from "react-router-dom";
-import Dropdown, { ToggleMenu, IMenuItem } from "./Dropdown";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';
+import App from './App';
+import * as serviceWorker from './serviceWorker';
 
-const demoItems = [
-  { label: "one", icon: <span>T</span>, to: "/home" },
-  { label: "Just string" },
-  { divider: true },
-  { label: "Exit", icon: <span>X</span>, to: "/exit", style: { color: "red" } }
-];
+ReactDOM.render(<App />, document.getElementById('root'));
 
-class App extends React.PureComponent<{}, {}> {
-  public render() {
-    return (
-      <Router>
-        <div>
-          <h1> Dropdown using array of items </h1>
-          <Dropdown
-            onSelect={console.table}
-            items={demoItems}
-            renderItem={null}
-          >
-            {(toggle: ToggleMenu) => <h4 onClick={toggle}> open </h4>}
-          </Dropdown>
-          <hr />
-          <h1> Dropdown with custom render </h1>
-          <Dropdown
-            onSelect={console.table}
-            items={demoItems}
-            renderItem={customRender}
-          >
-            {(toggle: ToggleMenu) => <button onClick={toggle}> open </button>}
-          </Dropdown>
-
-          <div style={{ width: "100px", border: "1px solid", margin: "5rem" }}>
-            <h5> test narrow </h5>
-            <Dropdown
-              onSelect={console.table}
-              items={demoItems}
-              renderItem={customRender}
-            >
-              {(toggle: ToggleMenu) => <button onClick={toggle}> open </button>}
-            </Dropdown>
-          </div>
-        </div>
-      </Router>
-    );
-  }
-}
-
-render(<App />, document.getElementById("root"));
-
-function customRender({ divider, label, style, props }: IMenuItem) {
-  return (
-    <li
-      style={{
-        ...style,
-        background: divider ? "#222" : "#FFF",
-        overflow: "hidden",
-        borderBottom: "1px solid #CCC",
-        height: divider ? "2px" : "auto"
-      }}
-      {...props}
-    >
-      this is custom for <label>{label}</label>
-    </li>
-  );
-}
+// If you want your app to work offline and load faster, you can change
+// unregister() to register() below. Note this comes with some pitfalls.
+// Learn more about service workers: https://bit.ly/CRA-PWA
+serviceWorker.unregister();
